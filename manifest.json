@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Chessuperior",
+  "version": "1.0",
+  "icons": {
+    "512": "logo.png"
+  },
+  "description": "Wtyczka dodająca przyciski umoźliwiające analizę partii poza Chess.com",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Kliknij, aby otworzyć"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
