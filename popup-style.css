@@ -13,7 +13,7 @@ body {
 
     color: #8b8b8b;
     height: 210px;
-    width: 150px;
+    width: 300px;
 }
 
 .content {
@@ -21,7 +21,8 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     border-radius: 8px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
 }
 
 .header {
@@ -39,4 +40,55 @@ body {
     font-size: 12px;
     padding: 4px;
     box-sizing: border-box;
+}
+
+.radiosContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    /* Opcjonalnie: usuwa domyślne wcięcie listy z lewej strony */
+    margin: 0;
+    /* Opcjonalnie: usuwa domyślne marginesy */
+    width: 100%;
+}
+
+ul li {
+    width: 100%;
+}
+
+ul li label {
+    width: 100%;
+}
+
+ul li label:has(input:checked) {
+    font-weight: bold;
+}
+
+#custom-domain-textbox {
+    color: #8b8b8b;
+    outline: 2px dashed #4b4b4b;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 3px;
+    padding-left: 5px;
+    margin: 3px;
+
+    background-color: #131313;
+    box-shadow: inset 0px 0px 7px 3px #0000007a;
+    outline: 1px solid #4b4b4b;
+}
+
+#custom-domain-textbox:focus {
+    background-color: #131313;
+    color: #d4d4d4;
+    background: linear-gradient(180deg, #2a2a2a 0%, #131313 100%);
 }

@@ -49,6 +49,11 @@ function appendThirdPartyAnalysisButtonGameOverModal() {
             const btn = createThirdPartyAnalysisButtonGameOverModal(chessigmaGameUrl)
             chessuperiorGameOverContainer.appendChild(btn);
 
+            const pgn = document.querySelector('#board-single').game.getPGN();
+            console.log(pgn);
+
+            openLichessAnalysisWithPGN(pgn);
+
         } else {
             const chesscomGameUrl = window.location.href;
             const chessigmaGameUrl = chesscomGameUrl.replace("chess.com", "6chess.com");
@@ -86,6 +91,23 @@ function unmaskChessigmaCoachComments() {
             }
         });
     }
+}
+
+function openLichessAnalysisWithPGN(pgn) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://lichess.org/api/import';
+    form.target = '_blank';
+
+    const pgnInput = document.createElement('input');
+    pgnInput.type = 'hidden';
+    pgnInput.name = 'pgn';
+    pgnInput.value = pgn;
+    form.appendChild(pgnInput);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
 }
 
 function main() {

@@ -13,9 +13,27 @@
             <span><b>Chessuperior</b></span>
         </div>
         <div class="main">
-            <span>Made by emju</span>
+            <div class="radiosContainer">
+                <span><b>Wybierz sposób analizy</b></span>
+                <ul>
+                    <li>
+                        <label class="radio-label" for="lichess-radio">
+                            <input type="radio" name="website-for-analysis" id="lichess-radio" value="lichess"
+                                checked>Lichess</label>
+                    </li>
+                    <li>
+                        <label class="radio-label" for="custom-domain-radio">
+                            <input type="radio" name="website-for-analysis" id="custom-domain-radio"
+                                value="custom-domain">Niestandardowa domena
+                            <input type="text" name="custom-domain-textbox" id="custom-domain-textbox"
+                                placeholder="ex. 6chess.com/..." value="" hidden>
+                        </label>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+    <script src="popup.js"></script>
 </body>
 
 </html>

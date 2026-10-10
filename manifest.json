@@ -6,6 +6,10 @@
     "512": "logo.png"
   },
   "description": "Wtyczka dodająca przyciski umoźliwiające analizę partii poza Chess.com",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Kliknij, aby otworzyć"
@@ -20,7 +24,8 @@
       ],
       "js": [
         "content.js"
-      ]
+      ],
+      "world": "MAIN"
     }
   ]
 }
