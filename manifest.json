@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Chessuperior",
-  "version": "1.1",
+  "version": "1.2",
   "icons": {
     "512": "logo.png"
   },
-  "description": "Wtyczka dodająca przyciski umoźliwiające analizę partii poza Chess.com",
+  "description": "Wtyczka dodająca przyciski umożliwiające analizę partii poza Chess.com",
   "action": {
     "default_popup": "popup.html",
     "default_title": "Kliknij, aby otworzyć"
@@ -13,7 +13,7 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "https://*.chess.com/*"
       ],
       "css": [
         "style.css"
@@ -22,5 +22,15 @@
         "content.js"
       ]
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "chessuperior@emju.com",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  }
 }

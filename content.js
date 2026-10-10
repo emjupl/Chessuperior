@@ -77,22 +77,10 @@ function appendThirdPartyAnalysisButtons() {
     }
 }
 
-function unmaskChessigmaCoachComments() {
-    if (window.location.hostname.includes("chessigma.com")) {
-        const coachComments = document.querySelectorAll(".v2CoachComment");
-        coachComments.forEach(element => {
-            if (element.getAttribute("data-masked") != 0) {
-                element.setAttribute("data-masked", "0");
-            }
-        });
-    }
-}
 
 function main() {
     appendThirdPartyAnalysisButtonGameOverModal()
     appendThirdPartyAnalysisButtons()
-    unmaskChessigmaCoachComments();
-
 
     let observerTimeout;
     const observer = new MutationObserver(() => {
