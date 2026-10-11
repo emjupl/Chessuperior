@@ -17,19 +17,15 @@
                 <span><b>Wybierz sposób analizy</b></span>
                 <ul>
                     <li>
-                        <label class="radio-label" for="lichess-radio">
-                            <input type="radio" name="website-for-analysis" id="lichess-radio" value="lichess"
-                                checked>Lichess</label>
-                    </li>
-                    <li>
                         <label class="radio-label" for="custom-domain-radio">
                             <input type="radio" name="website-for-analysis" id="custom-domain-radio"
-                                value="custom-domain">Niestandardowa domena
+                                value="custom-domain" checked>
                             <input type="text" name="custom-domain-textbox" id="custom-domain-textbox"
-                                placeholder="ex. 6chess.com/..." value="" hidden>
+                                placeholder="ex. 6chess.com/..." value="">
                         </label>
                     </li>
                 </ul>
+                <span id="alertSpan"></span>
             </div>
         </div>
     </div>

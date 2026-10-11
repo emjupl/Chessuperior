@@ -1,3 +1,14 @@
+
+let cachedPayload = {};
+
+async function initPayload() {
+    const result = await chrome.storage.local.get("payload");
+    if (result.payload) {
+        cachedPayload = result.payload;
+    }
+}
+initPayload();
+
 function createText(content) {
     const span = document.createElement('span');
     span.textContent = content;
@@ -28,16 +39,18 @@ function createThirdPartyAnalysisButtons(href) {
     return thirdPartyAnalysisButton;
 }
 
-
 function appendThirdPartyAnalysisButtonGameOverModal() {
     if (window.location.hostname.includes("chess.com") && window.location.pathname.includes("/game")) {
         const gameOverWindowButtonsContainer = document.querySelector(".game-over-modal-shell-buttons");
 
-        if (!gameOverWindowButtonsContainer) { return }
+        if (!gameOverWindowButtonsContainer) { return; }
+
+        const customDomain = cachedPayload.customGameUrl;
+        if (!customDomain) { return; }
 
         if (!document.getElementById("chessuperior-third-party-analysis-button-game-over")) {
             const chesscomGameUrl = window.location.href;
-            const chessigmaGameUrl = chesscomGameUrl.replace("chess.com", "6chess.com");
+            const chessigmaGameUrl = chesscomGameUrl.replace("chess.com", customDomain);
 
             const chessuperiorGameOverContainer = document.createElement("div");
             chessuperiorGameOverContainer.className = "chessuperior-box";
@@ -46,26 +59,26 @@ function appendThirdPartyAnalysisButtonGameOverModal() {
             const text = createText("Zewnetrzna analiza jest dostepna!");
             chessuperiorGameOverContainer.appendChild(text);
 
-            const btn = createThirdPartyAnalysisButtonGameOverModal(chessigmaGameUrl)
+            const btn = createThirdPartyAnalysisButtonGameOverModal(chessigmaGameUrl);
             chessuperiorGameOverContainer.appendChild(btn);
-
-            const pgn = document.querySelector('#board-single').game.getPGN();
-            console.log(pgn);
-
-            openLichessAnalysisWithPGN(pgn);
 
         } else {
             const chesscomGameUrl = window.location.href;
-            const chessigmaGameUrl = chesscomGameUrl.replace("chess.com", "6chess.com");
+            const chessigmaGameUrl = chesscomGameUrl.replace("chess.com", customDomain);
 
             const thirdPartyAnalysisButtonGameOver = document.getElementById('chessuperior-third-party-analysis-button-game-over');
-            thirdPartyAnalysisButtonGameOver.href = chessigmaGameUrl;
+            if (thirdPartyAnalysisButtonGameOver) {
+                thirdPartyAnalysisButtonGameOver.href = chessigmaGameUrl;
+            }
         }
     }
 }
 
 function appendThirdPartyAnalysisButtons() {
     if (window.location.hostname.includes("chess.com") && (window.location.pathname.includes("/member") || window.location.pathname.includes("/home") || window.location.pathname.includes("/games"))) {
+        const customDomain = cachedPayload.customGameUrl;
+        if (!customDomain) { return; }
+
         const chesscomGameAccuracyContainer = document.querySelectorAll(".game-accuracy-component");
         chesscomGameAccuracyContainer.forEach(element => {
             if (!element.classList.contains("analysis-buttons-container")) {
@@ -73,48 +86,18 @@ function appendThirdPartyAnalysisButtons() {
                 const chesscomAnalysisButton = element.querySelector('.game-accuracy-review-button');
                 if (chesscomAnalysisButton) {
                     const chesscomAnalysisUrl = chesscomAnalysisButton.href;
-                    const chessigmaAnalysisUrl = chesscomAnalysisUrl.replace("chess.com", "6chess.com");
+                    const chessigmaAnalysisUrl = chesscomAnalysisUrl.replace("chess.com", customDomain);
                     const btn = createThirdPartyAnalysisButtons(chessigmaAnalysisUrl);
                     element.appendChild(btn);
                 }
-            }
-        })
-    }
-}
-
-function unmaskChessigmaCoachComments() {
-    if (window.location.hostname.includes("chessigma.com")) {
-        const coachComments = document.querySelectorAll(".v2CoachComment");
-        coachComments.forEach(element => {
-            if (element.getAttribute("data-masked") != 0) {
-                element.setAttribute("data-masked", "0");
             }
         });
     }
 }
 
-function openLichessAnalysisWithPGN(pgn) {
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://lichess.org/api/import';
-    form.target = '_blank';
-
-    const pgnInput = document.createElement('input');
-    pgnInput.type = 'hidden';
-    pgnInput.name = 'pgn';
-    pgnInput.value = pgn;
-    form.appendChild(pgnInput);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-}
-
 function main() {
-    appendThirdPartyAnalysisButtonGameOverModal()
-    appendThirdPartyAnalysisButtons()
-    unmaskChessigmaCoachComments();
-
+    appendThirdPartyAnalysisButtonGameOverModal();
+    appendThirdPartyAnalysisButtons();
 
     let observerTimeout;
     const observer = new MutationObserver(() => {
@@ -122,7 +105,6 @@ function main() {
         observerTimeout = setTimeout(() => {
             appendThirdPartyAnalysisButtonGameOverModal();
             appendThirdPartyAnalysisButtons();
-            unmaskChessigmaCoachComments();
         }, 100);
     });
 
@@ -131,4 +113,5 @@ function main() {
         subtree: true
     });
 }
+
 main();

@@ -7,7 +7,6 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     background-color: #131313;
-    box-shadow: inset 0px 0px 6px 4px black;
     padding: 10px;
     box-sizing: border-box;
 
