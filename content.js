@@ -77,10 +77,9 @@ function appendThirdPartyAnalysisButtons() {
     }
 }
 
-
 function main() {
-    appendThirdPartyAnalysisButtonGameOverModal()
-    appendThirdPartyAnalysisButtons()
+    appendThirdPartyAnalysisButtonGameOverModal();
+    appendThirdPartyAnalysisButtons();
 
     let observerTimeout;
     const observer = new MutationObserver(() => {
@@ -88,7 +87,6 @@ function main() {
         observerTimeout = setTimeout(() => {
             appendThirdPartyAnalysisButtonGameOverModal();
             appendThirdPartyAnalysisButtons();
-            unmaskChessigmaCoachComments();
         }, 100);
     });
 
