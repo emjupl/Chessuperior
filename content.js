@@ -8,7 +8,7 @@ function createThirdPartyAnalysisButtonGameOverModal(href) {
     const thirdPartyAnalysisButtonGameOver = document.createElement("a");
     thirdPartyAnalysisButtonGameOver.classList.add("chessuperior-btn");
     thirdPartyAnalysisButtonGameOver.id = "chessuperior-third-party-analysis-button-game-over";
-    thirdPartyAnalysisButtonGameOver.textContent = "➔ Przejdź";
+    thirdPartyAnalysisButtonGameOver.textContent = "➔ Go to analysis";
     thirdPartyAnalysisButtonGameOver.href = href;
     thirdPartyAnalysisButtonGameOver.target = "_blank";
     return thirdPartyAnalysisButtonGameOver;
@@ -43,7 +43,7 @@ function appendThirdPartyAnalysisButtonGameOverModal() {
             chessuperiorGameOverContainer.className = "chessuperior-box";
             gameOverWindowButtonsContainer.appendChild(chessuperiorGameOverContainer);
 
-            const text = createText("Zewnetrzna analiza jest dostepna!");
+            const text = createText("External analysis is available!");
             chessuperiorGameOverContainer.appendChild(text);
 
             const btn = createThirdPartyAnalysisButtonGameOverModal(chessigmaGameUrl)

@@ -5,10 +5,10 @@
   "icons": {
     "512": "logo.png"
   },
-  "description": "Wtyczka dodająca przyciski umożliwiające analizę partii poza Chess.com",
+  "description": "A plugin that adds buttons allowing for game analysis outside of Chess.com.",
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Kliknij, aby otworzyć"
+    "default_title": "Click to open"
   },
   "content_scripts": [
     {
